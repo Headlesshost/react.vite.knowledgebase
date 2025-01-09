@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # Dynamically assign the environment based on the branch
-    environment: ${{ github.ref_name == 'master' && 'prod' || 'stage' }}
+    environment: ${{ github.ref_name == 'master' && 'Prod' || 'Stage' }}
 
     steps:
     - name: Checkout Code
@@ -33,7 +33,7 @@ jobs:
         AWS_REGION: ${{ secrets.AWS_REGION }}
 
     - name: Invalidate CloudFront Cache
-      uses: awact/cloudfront-action@v1
+      uses: awact/cloudfront-action@master
       with:
         distribution-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
         paths: "/*"
