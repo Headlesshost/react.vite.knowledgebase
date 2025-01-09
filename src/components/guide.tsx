@@ -1,13 +1,15 @@
-import { Author, PagedResponse, Section } from "../lib/types";
+import { Author, PagedResponse, Section, Site } from "../lib/types";
 import ResolveSection from "./resolveSection";
 import { useContentSiteGuide } from "../lib/_hooks";
 
 interface GuideProps {
   instanceId: string | undefined;
   authors?: PagedResponse<Author>;
+  site: Site;
+  pageIdentifier: string;
 }
 
-export default function Guide({ instanceId, authors }: GuideProps) {
+export default function Guide({ instanceId, authors, site, pageIdentifier }: GuideProps) {
   const { data, error, isLoading } = useContentSiteGuide(instanceId);
   if (isLoading) return null;
   if (error) return <div>Error: {error.message}</div>;
@@ -27,7 +29,7 @@ export default function Guide({ instanceId, authors }: GuideProps) {
                     <div className="text-sm my-3 mb-10 font-semibold mb-0 mr-1">{section?._meta?.name}</div>
                     <div className="text-sm my-3 mb-10 text-slate-500 mb-1 ">- {section?._meta?.description}</div>
                   </div>
-                  <ResolveSection section={section} key={section.id} authors={authors} />
+                  <ResolveSection section={section} key={section.id} authors={authors} site={site} pageIdentifier={pageIdentifier} />
                 </div>
               ))}
             </article>

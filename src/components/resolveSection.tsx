@@ -12,12 +12,14 @@ import OrderedList from "./sections/orderedList";
 import AuthorTable from "./sections/authorTable";
 import StandardHeading from "./sections/standardHeading";
 import ContactForm from "./sections/contactForm";
-import { Author, PagedResponse, Section } from "../lib/types";
+import { Author, PagedResponse, Section, Site } from "../lib/types";
 import ContactList from "./sections/contactList";
 
 interface SectionProps {
   section: Section;
   authors?: PagedResponse<Author>;
+  site: Site;
+  pageIdentifier: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -38,14 +40,14 @@ const sections: { [key: string]: React.FC<any> } = {
   CONTACT_LIST: ContactList,
 };
 
-const ResolveSection: React.FC<SectionProps> = ({ section, authors }) => {
+const ResolveSection: React.FC<SectionProps> = ({ section, authors, site, pageIdentifier }) => {
   const SectionComponent = sections[section.type];
 
   if (!SectionComponent) {
     return null;
   }
 
-  return <SectionComponent section={section} authors={authors} />;
+  return <SectionComponent section={section} authors={authors} site={site} pageIdentifier={pageIdentifier} />;
 };
 
 export default ResolveSection;

@@ -33,7 +33,6 @@ const OnThisPage: React.FC<OnThisPageProps> = ({ page }) => {
               <Link className="font-normal text-slate-500 hover:text-slate-900" to={`#${link.link}`}>
                 {link.title}
               </Link>
-
               {link.children.length > 0 && (
                 <ol className="mt-2 space-y-3 pl-5 text-slate-500">
                   {link.children.map((child) => (

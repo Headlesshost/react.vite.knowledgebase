@@ -38,7 +38,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Layout site={siteData} instanceId={instanceIdResolved} />}>
         <Route index element={<Body site={siteData} authors={authorData} />} />
-        <Route path="/guide" element={<Guide instanceId={instanceIdResolved} authors={authorData} />} />
+        <Route path="/guide" element={<Guide instanceId={instanceIdResolved} authors={authorData} site={siteData} pageIdentifier="Guide" />} />
         <Route path="*" element={<Body site={siteData} authors={authorData} />} />
       </Route>
     </Routes>

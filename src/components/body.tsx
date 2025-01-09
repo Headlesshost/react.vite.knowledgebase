@@ -17,10 +17,7 @@ const Body: React.FC<BodyProps> = ({ site, authors }) => {
   const defaultPageName = globals?.defaultPage || "home";
   if (!site) return <div>No site</div>;
   const pageIdentifier = location.pathname.substring(1);
-  console.log("pageIdentifier", pageIdentifier);
   const selectedPage = site.content?.pages?.find((page) => page.identifier === pageIdentifier);
-  console.log("selectedPage", selectedPage);
-
   const defaultPage = site.content?.pages?.find((page) => page.identifier === defaultPageName) || site.content?.pages?.[0];
   const page = selectedPage || defaultPage;
   if (!page) return <div>No page</div>;
@@ -44,13 +41,13 @@ const Body: React.FC<BodyProps> = ({ site, authors }) => {
       <ScrollToHash />
       <div className="container mx-auto flex flex-wrap max-w-7xl justify-center px-4 pt-6">
         <aside className="hidden lg:block lg:w-1/4 xl:w-1/6">
-          <LeftNav site={site} usingDefaultPage={!selectedPage && defaultPage.identifier} />
+          <LeftNav site={site} usingDefaultPage={!selectedPage && defaultPage.identifier} pageIdentifier={pageIdentifier} />
         </aside>
         <>
           <main className="w-full lg:w-3/4 xl:w-2/3 py-4 px-8">
             <article>
               {page.sections?.map((section: Section) => (
-                <ResolveSection section={section} key={section.id} authors={authors} />
+                <ResolveSection section={section} key={section.id} authors={authors} site={site} pageIdentifier={pageIdentifier} />
               ))}
             </article>
             <PageFoot globals={site?.content?.globals} pageIdentifier={pageIdentifier} />
