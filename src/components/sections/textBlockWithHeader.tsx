@@ -2,9 +2,13 @@ import React from "react";
 import { Heading, Section } from "../../lib/types";
 import StandardHeading from "./standardHeading";
 
-interface TextBlockWithHeaderSection extends Section {
+interface TextBlockWithHeaderSectionContent {
   heading: Heading;
   content: string;
+}
+
+interface TextBlockWithHeaderSection extends Section {
+  content: TextBlockWithHeaderSectionContent;
 }
 
 interface TextBlockWithHeaderProps {
@@ -12,7 +16,7 @@ interface TextBlockWithHeaderProps {
 }
 
 const TextBlockWithHeader: React.FC<TextBlockWithHeaderProps> = ({ section }) => {
-  const { content } = section;
+  const { content } = section?.content || {};
 
   return (
     <div className="mb-14">

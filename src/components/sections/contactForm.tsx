@@ -2,8 +2,13 @@ import { Section } from "../../lib/types";
 import { FormEvent } from "react";
 import { useState } from "react";
 
-interface ContactFormSection extends Section {
+interface ContactFormSectionContent {
   introduction: string;
+  title: string;
+}
+
+interface ContactFormSection extends Section {
+  content: ContactFormSectionContent;
 }
 
 interface ContactFormProps {
@@ -11,14 +16,14 @@ interface ContactFormProps {
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ section }) => {
-  const { introduction, title } = section;
+  const { introduction, title } = section?.content || {};
   const siteId = import.meta.env.VITE_CONTENT_SITEID;
   const [sent, setSent] = useState(false);
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const response = await fetch(`https://api.headlesshost.com/sites/${siteId}/contact`, {
+    const response = await fetch(`http://localhost:5015/sites/${siteId}/contact`, {
       method: "POST",
       body: formData,
     });

@@ -1,7 +1,11 @@
 import { Author, PagedResponse, Section } from "../../lib/types";
 
-interface AuthorTableSection extends Section {
+interface AuthorTableSectionContent {
   title: string;
+}
+
+interface AuthorTableSection extends Section {
+  content: AuthorTableSectionContent;
 }
 
 interface AuthorTableProps {

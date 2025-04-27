@@ -1,11 +1,8 @@
-import { ReactNode } from "react";
-
 export interface Section {
   id: string;
   type: string;
   title: string;
   code?: string;
-  content: ReactNode;
   heading?: Heading;
   _meta?: Meta;
 }
@@ -94,9 +91,13 @@ export interface LinkGroup {
   links: NavigationLink[];
 }
 
-export interface Globals {
+export interface GlobalsContent {
   navigation?: LinkGroup[];
   defaultPage?: string;
+}
+
+export interface Globals {
+  content: GlobalsContent;
 }
 
 export interface Heading {
@@ -104,10 +105,14 @@ export interface Heading {
   headingType: "h1" | "h2" | "h3" | "h4" | "h5" | "default" | undefined;
 }
 
-export interface Header {
+export interface HeaderContent {
   smallLogo: ImageDetails;
   largeLogo: ImageDetails;
   links: NavigationLink[];
+}
+
+export interface Header {
+  content: HeaderContent;
 }
 
 export interface PagedResponse<T> {

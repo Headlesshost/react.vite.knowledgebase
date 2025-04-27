@@ -1,7 +1,11 @@
 import { Section } from "../../lib/types";
 
-interface OrderedList extends Section {
+interface OrderedListContent {
   items: string[];
+}
+
+interface OrderedList extends Section {
+  content: OrderedListContent;
 }
 
 interface OrderedListProps {
@@ -10,7 +14,7 @@ interface OrderedListProps {
 
 const OrderedList: React.FC<OrderedListProps> = ({ section }) => {
   if (!section) return null;
-  const { items } = section;
+  const { items } = section?.content || {};
 
   return (
     <ol className="custom-steps mb-14 scroll-mt-20" id={section.id}>
