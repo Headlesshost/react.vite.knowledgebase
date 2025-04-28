@@ -13,7 +13,7 @@ interface PageFootProps {
 }
 
 const PageFoot = ({ globals, pageIdentifier }: PageFootProps) => {
-  const { navigation: links = [] } = globals;
+  const { navigation: links = [] } = globals?.content || {};
 
   let nextLink: NavigationItem | undefined;
   let prevLink: NavigationItem | undefined;
