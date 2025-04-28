@@ -1,11 +1,9 @@
 import { Section } from "../../lib/types";
 
-interface OrderedListContent {
-  items: string[];
-}
-
 interface OrderedList extends Section {
-  content: OrderedListContent;
+  content: {
+    items: string[];
+  };
 }
 
 interface OrderedListProps {

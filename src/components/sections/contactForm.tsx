@@ -2,13 +2,11 @@ import { Section } from "../../lib/types";
 import { FormEvent } from "react";
 import { useState } from "react";
 
-interface ContactFormSectionContent {
-  introduction: string;
-  title: string;
-}
-
 interface ContactFormSection extends Section {
-  content: ContactFormSectionContent;
+  content: {
+    introduction: string;
+    title: string;
+  };
 }
 
 interface ContactFormProps {

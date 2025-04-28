@@ -3,14 +3,12 @@ import React from "react";
 
 import { ReactNode } from "react";
 
-interface InfoBoxSectionContent {
-  colour: string;
-  content: ReactNode;
-  title: string;
-}
-
 interface InfoBoxSection extends Section {
-  content: InfoBoxSectionContent;
+  content: {
+    colour: string;
+    content: ReactNode;
+    title: string;
+  };
 }
 
 interface InfoBoxProps {

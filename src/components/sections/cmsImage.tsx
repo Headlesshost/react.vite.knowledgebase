@@ -1,12 +1,10 @@
 import { Section, ImageDetails } from "../../lib/types";
 
-interface CmsImageSectionContent {
-  image: ImageDetails;
-  title: string;
-}
-
 interface CmsImageSection extends Section {
-  content: CmsImageSectionContent;
+  content: {
+    image: ImageDetails;
+    title: string;
+  };
 }
 
 interface CmsImageProps {

@@ -9,13 +9,11 @@ interface Contact {
   phone: string;
 }
 
-interface ContactListSectionContent {
-  contacts: Contact[];
-  heading: Heading;
-}
-
 interface ContactListSection extends Section {
-  content: ContactListSectionContent;
+  content: {
+    contacts: Contact[];
+    heading: Heading;
+  };
 }
 
 interface ContactListProps {

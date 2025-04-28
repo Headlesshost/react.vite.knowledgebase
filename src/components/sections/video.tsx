@@ -1,13 +1,11 @@
 import { Section } from "../../lib/types";
 import React from "react";
 
-interface VideoSectionContent {
-  title: string;
-  link: string;
-}
-
 interface VideoSection extends Section {
-  content: VideoSectionContent;
+  content: {
+    title: string;
+    link: string;
+  };
 }
 
 interface VideoProps {

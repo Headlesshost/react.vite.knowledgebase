@@ -1,12 +1,10 @@
 import React from "react";
 import { Section } from "../../lib/types";
 
-interface TextBlockPropsContent {
-  content: string;
-}
-
 interface TextBlockSection extends Section {
-  content: TextBlockPropsContent;
+  content: {
+    content: string;
+  };
 }
 
 interface TextBlockSectionProps {

@@ -1,14 +1,12 @@
 import { Section } from "../../lib/types";
 import { CopyBlock, dracula } from "react-code-blocks";
 
-interface CodeBlockSectionContent {
-  code: string;
-  language: string;
-  showLineNumbers: boolean;
-}
-
 interface CodeBlockSection extends Section {
-  content: CodeBlockSectionContent;
+  content: {
+    code: string;
+    language: string;
+    showLineNumbers: boolean;
+  };
 }
 
 interface CodeBlockProps {

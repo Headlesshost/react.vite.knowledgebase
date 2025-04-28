@@ -2,16 +2,14 @@ import * as utils from "../../lib/common";
 import React from "react";
 import { Author, PagedResponse, Section, Site } from "../../lib/types";
 
-interface PageHeaderSectionContent {
-  introduction: string | undefined;
-  authorSelect: string;
-  parent: string | undefined;
-  created: string | undefined;
-  title: string;
-}
-
 interface PageHeaderSection extends Section {
-  content: PageHeaderSectionContent;
+  content: {
+    introduction: string | undefined;
+    authorSelect: string;
+    parent: string | undefined;
+    created: string | undefined;
+    title: string;
+  };
 }
 
 interface PageHeaderProps {
@@ -24,8 +22,8 @@ interface PageHeaderProps {
 const PageHeader: React.FC<PageHeaderProps> = ({ section, authors, site, pageIdentifier }) => {
   const { introduction, authorSelect, title, created } = section?.content || {};
   const author = authors?.result?.find((a) => a.cid === authorSelect);
-  const defaultGroup = site?.content?.globals?.navigation?.[0]?.group ?? "";
-  const selected = site?.content?.globals?.navigation?.find((item) => item.links?.find((child) => child.slug === pageIdentifier));
+  const defaultGroup = site?.content?.globals?.content?.navigation?.[0]?.group ?? "";
+  const selected = site?.content?.globals?.content?.navigation?.find((item) => item.links?.find((child) => child.slug === pageIdentifier));
   const group = selected?.group ?? defaultGroup;
 
   return (

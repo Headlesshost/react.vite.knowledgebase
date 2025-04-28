@@ -1,12 +1,10 @@
 import { NavigationLink, Section } from "../../lib/types";
 import { Link } from "react-router-dom";
 
-interface NavLinkSectionContent {
-  link: NavigationLink;
-}
-
 interface NavLinkSection extends Section {
-  content: NavLinkSectionContent;
+  content: {
+    link: NavigationLink;
+  };
 }
 
 interface NavLinkProps {

@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
 import { NavigationLink, Section } from "../../lib/types";
 
-interface ActionBoxSectionContent {
-  link: NavigationLink;
-  content: string; // specify the type of content
-  title: string;
-}
-
 interface ActionBoxSection extends Section {
-  content: ActionBoxSectionContent;
+  content: {
+    link: NavigationLink;
+    content: string; // specify the type of content
+    title: string;
+  };
 }
 
 interface ActionBoxProps {

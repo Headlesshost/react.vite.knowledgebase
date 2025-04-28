@@ -1,12 +1,10 @@
 import React from "react";
 import { Heading, Section } from "../../lib/types";
 
-interface StandardHeadingSectionContent {
-  heading: Heading;
-}
-
 interface StandardHeadingSection extends Section {
-  content: StandardHeadingSectionContent;
+  content: {
+    heading: Heading;
+  };
 }
 
 interface StandardHeadingProps {

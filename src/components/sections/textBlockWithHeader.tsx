@@ -2,13 +2,11 @@ import React from "react";
 import { Heading, Section } from "../../lib/types";
 import StandardHeading from "./standardHeading";
 
-interface TextBlockWithHeaderSectionContent {
-  heading: Heading;
-  content: string;
-}
-
 interface TextBlockWithHeaderSection extends Section {
-  content: TextBlockWithHeaderSectionContent;
+  content: {
+    heading: Heading;
+    content: string;
+  };
 }
 
 interface TextBlockWithHeaderProps {
