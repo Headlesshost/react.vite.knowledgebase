@@ -14,7 +14,7 @@ const Login = () => {
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
 
-    const response = await fetch(`https://api.headlesshost.com/sites/${import.meta.env.VITE_CONTENT_SITEID}/token`, {
+    const response = await fetch(`http://localhost:5015/sites/${import.meta.env.VITE_CONTENT_SITEID}/token`, {
       method: "POST", // Specify the HTTP method
       headers: {
         "Content-Type": "application/json", // Specify the content type

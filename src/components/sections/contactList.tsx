@@ -10,8 +10,10 @@ interface Contact {
 }
 
 interface ContactListSection extends Section {
-  contacts: Contact[];
-  heading: Heading;
+  content: {
+    contacts: Contact[];
+    heading: Heading;
+  };
 }
 
 interface ContactListProps {
@@ -43,7 +45,7 @@ const ContactList: React.FC<ContactListProps> = ({ section }) => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {section?.contacts.map((i) => (
+            {section?.content?.contacts.map((i) => (
               <tr key={i.name}>
                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                   <div className="flex space-x-4 items-center">

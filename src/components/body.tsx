@@ -14,7 +14,7 @@ interface BodyProps {
 const Body: React.FC<BodyProps> = ({ site, authors }) => {
   const location = useLocation();
   const { globals } = site?.content || {};
-  const defaultPageName = globals?.defaultPage || "home";
+  const defaultPageName = globals?.content?.defaultPage || "home";
   if (!site) return <div>No site</div>;
   const pageIdentifier = location.pathname.substring(1);
   const selectedPage = site.content?.pages?.find((page) => page.identifier === pageIdentifier);

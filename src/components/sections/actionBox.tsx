@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import { NavigationLink, Section } from "../../lib/types";
 
 interface ActionBoxSection extends Section {
-  link: NavigationLink;
-  content: string; // specify the type of content
+  content: {
+    link: NavigationLink;
+    content: string; // specify the type of content
+    title: string;
+  };
 }
 
 interface ActionBoxProps {
@@ -11,7 +14,7 @@ interface ActionBoxProps {
 }
 
 const ActionBox: React.FC<ActionBoxProps> = ({ section }) => {
-  const { link, title, content } = section;
+  const { link, title, content } = section?.content || {};
   const linkLabel = link?.title;
 
   return (

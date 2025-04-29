@@ -19,8 +19,8 @@ export default function SiteHeader({ site, instanceId }: HeaderProps) {
   const navigate = useNavigate();
 
   const { pathname } = location;
-  const { navigation: links = [] } = globals;
-  const { smallLogo, largeLogo, links: headerLinks = [] } = header;
+  const { navigation: links = [] } = globals.content;
+  const { smallLogo, largeLogo, links: headerLinks = [] } = header.content;
   const exToken = isTokenExpired();
   const [expiredToken, setExpiredToken] = useState(exToken);
 

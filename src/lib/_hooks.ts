@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Author, Guide, List, PagedResponse, SearchResult, Site } from "./types";
 import { io } from "socket.io-client";
 
-const socket = io("https://api.headlesshost.com");
+const socket = io("http://localhost:5015");
 
 function getTokenFromLocalStorage() {
   const token = localStorage.getItem("token");
@@ -15,7 +15,7 @@ function getTokenFromLocalStorage() {
 export function useContentSite(instanceId: string | undefined, isExpToken: boolean) {
   const headers = getTokenFromLocalStorage();
   const fetchData = async (): Promise<Site> => {
-    const response = await fetch(`https://api.headlesshost.com/sites/${import.meta.env.VITE_CONTENT_SITEID}/instance/${instanceId}`, {
+    const response = await fetch(`http://localhost:5015/sites/${import.meta.env.VITE_CONTENT_SITEID}/instance/${instanceId}`, {
       headers,
     });
     if (!response.ok) {
@@ -40,7 +40,7 @@ export function useContentSite(instanceId: string | undefined, isExpToken: boole
 export function useAuthors(instanceId: string | undefined) {
   const headers = getTokenFromLocalStorage();
   const fetchData = async (): Promise<PagedResponse<Author>> => {
-    const response = await fetch(`https://api.headlesshost.com/sites/${import.meta.env.VITE_CONTENT_SITEID}/instance/${instanceId}/catalogs/AUTHORS`, {
+    const response = await fetch(`http://localhost:5015/sites/${import.meta.env.VITE_CONTENT_SITEID}/instance/${instanceId}/catalogs/AUTHORS`, {
       headers,
     });
     if (!response.ok) {
@@ -59,7 +59,7 @@ export function useAuthors(instanceId: string | undefined) {
 export function useSearch(instanceId: string | null | undefined, term: string) {
   const headers = getTokenFromLocalStorage();
   const fetchData = async (): Promise<SearchResult[]> => {
-    const response = await fetch(`https://api.headlesshost.com/sites/${import.meta.env.VITE_CONTENT_SITEID}/instance/${instanceId}/search?text=${encodeURIComponent(term)}`, {
+    const response = await fetch(`http://localhost:5015/sites/${import.meta.env.VITE_CONTENT_SITEID}/instance/${instanceId}/search?text=${encodeURIComponent(term)}`, {
       headers,
     });
     if (!response.ok) {
@@ -78,7 +78,7 @@ export function useSearch(instanceId: string | null | undefined, term: string) {
 export function useContentSiteGuide(instanceId: string | undefined) {
   const headers = getTokenFromLocalStorage();
   const fetchData = async (): Promise<Guide> => {
-    const response = await fetch(`https://api.headlesshost.com/sites/${import.meta.env.VITE_CONTENT_SITEID}/instance/${instanceId}/guide`, {
+    const response = await fetch(`http://localhost:5015/sites/${import.meta.env.VITE_CONTENT_SITEID}/instance/${instanceId}/guide`, {
       headers,
     });
     if (!response.ok) {
@@ -97,7 +97,7 @@ export function useContentSiteGuide(instanceId: string | undefined) {
 export function useSiteList() {
   const headers = getTokenFromLocalStorage();
   const fetchData = async (): Promise<List> => {
-    const response = await fetch(`https://api.headlesshost.com/sites/${import.meta.env.VITE_CONTENT_SITEID}/list`, {
+    const response = await fetch(`http://localhost:5015/sites/${import.meta.env.VITE_CONTENT_SITEID}/list`, {
       headers,
     });
     if (!response.ok) {
