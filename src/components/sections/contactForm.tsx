@@ -21,7 +21,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ section }) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const response = await fetch(`http://localhost:5015/sites/${siteId}/contact`, {
+    const response = await fetch(`https://api.headlesshost.com/sites/${siteId}/contact`, {
       method: "POST",
       body: formData,
     });
