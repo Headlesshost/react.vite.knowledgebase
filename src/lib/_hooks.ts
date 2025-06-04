@@ -12,10 +12,12 @@ function getTokenFromLocalStorage() {
   return headers;
 }
 
-export function useContentSite(instanceId: string | undefined, isExpToken: boolean) {
+export function useContentSite(instanceId: string | undefined, isExpToken: boolean, locale: string | null | undefined, segment: string | null | undefined) {
   const headers = getTokenFromLocalStorage();
   const fetchData = async (): Promise<Site> => {
-    const response = await fetch(`https://api.headlesshost.com/sites/${import.meta.env.VITE_CONTENT_SITEID}/instance/${instanceId}`, {
+    const localeParam = locale ? `/locale/${encodeURIComponent(locale)}` : "";
+    const segmentParam = segment && locale ? `/segment/${encodeURIComponent(segment)}` : "";
+    const response = await fetch(`https://api.headlesshost.com/sites/${import.meta.env.VITE_CONTENT_SITEID}/instance/${instanceId}${localeParam}${segmentParam}`, {
       headers,
     });
     if (!response.ok) {
@@ -31,7 +33,7 @@ export function useContentSite(instanceId: string | undefined, isExpToken: boole
   };
 
   return useQuery<Site, Error>({
-    queryKey: ["site", "instance", instanceId, isExpToken],
+    queryKey: ["site", "instance", instanceId, isExpToken, segment, locale],
     queryFn: fetchData,
     enabled: !!instanceId,
   });
@@ -56,10 +58,12 @@ export function useAuthors(instanceId: string | undefined) {
   });
 }
 
-export function useSearch(instanceId: string | null | undefined, term: string) {
+export function useSearch(instanceId: string | null | undefined, term: string, locale: string | null | undefined, segment: string | null | undefined) {
   const headers = getTokenFromLocalStorage();
   const fetchData = async (): Promise<SearchResult[]> => {
-    const response = await fetch(`https://api.headlesshost.com/sites/${import.meta.env.VITE_CONTENT_SITEID}/instance/${instanceId}/search?text=${encodeURIComponent(term)}`, {
+    const localeParam = locale ? `/locale/${encodeURIComponent(locale)}` : "";
+    const segmentParam = segment && locale ? `/segment/${encodeURIComponent(segment)}` : "";
+    const response = await fetch(`https://api.headlesshost.com/sites/${import.meta.env.VITE_CONTENT_SITEID}/instance/${instanceId}/search${localeParam}${segmentParam}?text=${encodeURIComponent(term)}`, {
       headers,
     });
     if (!response.ok) {

@@ -9,9 +9,11 @@ import { isTokenExpired } from "../lib/common";
 interface HeaderProps {
   site: Site;
   instanceId: string | null | undefined;
+  locale: string | null | undefined;
+  segment: string | null | undefined;
 }
 
-export default function SiteHeader({ site, instanceId }: HeaderProps) {
+export default function SiteHeader({ site, instanceId, locale, segment }: HeaderProps) {
   const { globals, header } = site.content;
   if (!header) return <div>Need to configure header in Headlesshost</div>;
   const [showNav, setShowNav] = useState(false);
@@ -61,7 +63,7 @@ export default function SiteHeader({ site, instanceId }: HeaderProps) {
             </nav>
           </div>
           <div className="flex items-center flex-1 justify-end">
-            <Search instanceId={instanceId} />
+            <Search instanceId={instanceId} locale={locale} segment={segment} />
             {import.meta.env.VITE_SIGNIN === "true" && (
               <>
                 {expiredToken ? (
