@@ -12,12 +12,14 @@ interface SearchResult {
 
 interface SearchProps {
   instanceId: string | null | undefined;
+  locale: string | null | undefined;
+  segment: string | null | undefined;
 }
 
-export default function Search({ instanceId }: SearchProps) {
+export default function Search({ instanceId, locale, segment }: SearchProps) {
   const [debouncedValue, setDebouncedValue] = useState<string>("");
   const [searchValue, setSearchValue] = useState<string>("");
-  const { data: searchResults } = useSearch(instanceId, debouncedValue);
+  const { data: searchResults } = useSearch(instanceId, debouncedValue, locale, segment);
   const navigate = useNavigate();
   const pageIds = searchResults ? Array.from(new Set(searchResults.map((s) => s.pageId))) : [];
   const tags = searchResults
@@ -25,6 +27,10 @@ export default function Search({ instanceId }: SearchProps) {
     .map((p) => p.pageContent.tags[0].value)
     .flat();
   const uniqueTags = Array.from(new Set(tags));
+  if (uniqueTags.length === 0) {
+    uniqueTags.push("NO_TAGS");
+  }
+
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const debouncedUpdate = useCallback(
@@ -83,11 +89,15 @@ export default function Search({ instanceId }: SearchProps) {
           {searchResults && searchResults?.length > 0 && (
             <div className="absolute z-10 w-full mt-2 border border-slate-300 rounded-md shadow-lg bg-slate-300 overflow-y-auto max-h-[calc(100vh-100px)]">
               {uniqueTags.map((tag) => {
-                const filteredPageIds = pageIds.filter((id) => searchResults?.some((r) => r.pageId === id && r?.pageContent?.tags?.length > 0 && r.pageContent.tags[0].value === tag));
+                const filteredPageIds = pageIds.filter((id) => searchResults?.some((r) => r.pageId === id && ((r?.pageContent?.tags?.length > 0 && r.pageContent.tags[0].value === tag) || tag === "NO_TAGS")));
                 return (
                   <div className="p-6 rounded-lg bg-white m-2" key={tag}>
-                    <div className="font-display font-semibold text-slate-900">{tag}</div>
-                    <hr className="my-2 border-slate-300" />
+                    {tag !== "NO_TAGS" && (
+                      <>
+                        <div className="font-display font-semibold text-slate-900">{tag}</div>
+                        <hr className="my-2 border-slate-300" />
+                      </>
+                    )}
                     {filteredPageIds.map((p) => {
                       const pageResults = searchResults.filter((r) => r.pageId === p);
                       return (
